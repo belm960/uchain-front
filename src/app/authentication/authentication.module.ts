@@ -14,6 +14,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { httpInterceptorProviders } from '../shared/security/auth-interceptor';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 @NgModule({
   declarations: [
     Page500Component,
@@ -30,8 +34,12 @@ import { httpInterceptorProviders } from '../shared/security/auth-interceptor';
     AuthenticationRoutingModule,
     MatFormFieldModule,
     MatInputModule,
+    MatTabsModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSelectModule,
+    MatSnackBarModule,
+    MatCheckboxModule,
   ],
   providers: [httpInterceptorProviders]
 })

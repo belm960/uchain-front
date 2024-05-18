@@ -88,14 +88,14 @@ export class SidebarComponent implements OnInit {
       this.sidebarItems = ROUTES.filter(
         (x) => x.role.indexOf(userRole) !== -1 || x.role.indexOf('All') !== -1
       );
-      if (userRole === Role.Admin) {
-        this.userType = Role.Admin;
-      } else if (userRole === Role.Patient) {
-        this.userType = Role.Patient;
-      } else if (userRole === Role.Doctor) {
-        this.userType = Role.Doctor;
+      if (userRole === Role.BUYER) {
+        this.userType = Role.BUYER;
+      } else if (userRole === Role.DRIVER) {
+        this.userType = Role.DRIVER;
+      } else if (userRole === Role.SELLER) {
+        this.userType = Role.SELLER;
       } else {
-        this.userType = Role.Admin;
+        this.userType = Role.BUYER;
       }
     }
 
