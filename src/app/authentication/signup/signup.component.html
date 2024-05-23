@@ -8,9 +8,7 @@
         <div class="body">
           <mat-tab-group>
             <mat-tab label="Buyer">
-              <br>
-              <div class="body">
-                <form class="registerFormBuyer-form m-4" [formGroup]="registerFormBuyer" (ngSubmit)="onSubmit('buyer')">
+                <form class="register-form m-4" [formGroup]="registerFormBuyer" (ngSubmit)="onSubmit('buyer')">
                   <div class="row">
                     <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                       <mat-form-field class="example-full-width" appearance="outline">
@@ -88,6 +86,18 @@
                   </div>
                   <div class="row">
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                      <mat-form-field class="example-full-width mb-3">
+                        <ngx-mat-file-input formControlName="profile_image" placeholder="Upload Picture">
+                        </ngx-mat-file-input>
+                        <mat-icon matSuffix>cloud_upload</mat-icon>
+                        <mat-error *ngIf="registerFormBuyer.get('profile_image').hasError('required')">
+                          Profile Image is required
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                       <mat-checkbox class="example-margin" formControlName="termcondition">I accept
                         terms
                         and conditions
@@ -100,12 +110,11 @@
                     </div>
                   </div>
                 </form>
-              </div>
             </mat-tab>
             <mat-tab label="Seller">
               <br>
               <div class="body">
-                <form class="registerFormBuyer-form m-4" [formGroup]="registerFormSeller" (ngSubmit)="onSubmit('seller')">
+                <form class="register-form m-4" [formGroup]="registerFormSeller" (ngSubmit)="onSubmit('seller')">
                   <div class="row">
                     <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                       <mat-form-field class="example-full-width" appearance="outline">
@@ -137,6 +146,19 @@
                           {{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                         <mat-error *ngIf="registerFormSeller.get('password').hasError('required')">
                           Password is required
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                      <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>Tax Number</mat-label>
+                        <input matInput formControlName="tax_number" required>
+                        <mat-icon matSuffix>
+                          visibility</mat-icon>
+                        <mat-error *ngIf="registerFormSeller.get('tax_number').hasError('required')">
+                          Tax Number is required
                         </mat-error>
                       </mat-form-field>
                     </div>
@@ -183,6 +205,18 @@
                   </div>
                   <div class="row">
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                      <mat-form-field class="example-full-width mb-3">
+                        <ngx-mat-file-input formControlName="profile_image" placeholder="Upload Picture">
+                        </ngx-mat-file-input>
+                        <mat-icon matSuffix>cloud_upload</mat-icon>
+                        <mat-error *ngIf="registerFormSeller.get('profile_image').hasError('required')">
+                          Profile Image is required
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                       <mat-checkbox class="example-margin" formControlName="termcondition">I accept
                         terms
                         and conditions
@@ -200,7 +234,7 @@
             <mat-tab label="Driver">
               <br>
               <div class="body">
-                <form class="registerFormBuyer-form m-4" [formGroup]="registerFormDriver" (ngSubmit)="onSubmit('driver')">
+                <form class="register-form m-4" [formGroup]="registerFormDriver" (ngSubmit)="onSubmit('driver')">
                   <div class="row">
                     <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                       <mat-form-field class="example-full-width" appearance="outline">
@@ -272,6 +306,40 @@
                         <mat-icon matSuffix>business</mat-icon>
                         <mat-error *ngIf="registerFormDriver.get('account_number').hasError('required')">
                           Account Number is required
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                      <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>License Number</mat-label>
+                        <input matInput formControlName="license_number" required>
+                        <mat-icon matSuffix>location_city</mat-icon>
+                        <mat-error *ngIf="registerFormDriver.get('license_number').hasError('required')">
+                          License Number is required
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                      <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>Car Model</mat-label>
+                        <input matInput formControlName="car_model" required>
+                        <mat-icon matSuffix>business</mat-icon>
+                        <mat-error *ngIf="registerFormDriver.get('car_model').hasError('required')">
+                          Car Model is required
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                      <mat-form-field class="example-full-width mb-3">
+                        <ngx-mat-file-input formControlName="profile_image" placeholder="Upload Picture">
+                        </ngx-mat-file-input>
+                        <mat-icon matSuffix>cloud_upload</mat-icon>
+                        <mat-error *ngIf="registerFormDriver.get('profile_image').hasError('required')">
+                          Profile Image is required
                         </mat-error>
                       </mat-form-field>
                     </div>

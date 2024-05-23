@@ -17,7 +17,7 @@ export class AuthService {
   isLogin = false;
   roleAs: string
   private loginUrl = 'http://127.0.0.1:8000/user/login ';
-  private signupUrl = 'http://127.0.0.1:8000/buyer/register';
+  
  
   constructor(private http: HttpClient) {
   }
@@ -27,8 +27,9 @@ export class AuthService {
     return this.http.post<JwtResponse>(this.loginUrl, formData);
   }
  
-  signUp(formData: FormData): Observable<string> {
-    return this.http.post<string>(this.signupUrl, formData);
+  signUp(formData: FormData, profile: string): Observable<string> {
+    const signupUrl = 'http://127.0.0.1:8000/'+profile+'/register';
+    return this.http.post<string>(signupUrl, formData);
   }
   getRole() {
     return localStorage.getItem('ROLE');
