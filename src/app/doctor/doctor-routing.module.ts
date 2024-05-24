@@ -4,7 +4,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AppointmentsComponent } from './appointments/appointments.component';
 import { DoctorsComponent } from './doctors/doctors.component';
-import { PatientsComponent } from './patients/patients.component';
 import { SettingsComponent } from './settings/settings.component';
 const routes: Routes = [
   {
@@ -20,12 +19,13 @@ const routes: Routes = [
     component: DoctorsComponent,
   },
   {
-    path: 'patients',
-    component: PatientsComponent,
-  },
-  {
     path: 'settings',
     component: SettingsComponent,
+  },
+  {
+    path: 'products',
+    loadChildren: () =>
+      import('./products/products.module').then((m) => m.ProductsModule),
   },
   { path: '**', component: Page404Component },
 ];

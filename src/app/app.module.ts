@@ -49,6 +49,7 @@ import { MatInputModule } from "@angular/material/input";
 import { HttpClientModule } from "@angular/common/http";
 import { ClickOutsideModule } from "ng-click-outside";
 import { httpInterceptorProviders } from './shared/security/auth-interceptor';
+import { ProductService } from "./doctor/products/product.service";
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -109,6 +110,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     PastAppointmentService,
     AuthService,
     AuthGuard,
+    ProductService
   ],
   entryComponents: [
     SimpleDialogComponent,

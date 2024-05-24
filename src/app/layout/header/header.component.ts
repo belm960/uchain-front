@@ -10,6 +10,7 @@ import {
 import { RightSidebarService } from '../../shared/services/rightsidebar.service';
 import { ConfigService } from '../../shared/services/config.service';
 import { AuthService } from 'src/app/shared/security/auth.service';
+import { TokenStorageService } from 'src/app/shared/security/token-storage.service';
 import { Router } from '@angular/router';
 const document: any = window.document;
 
@@ -30,8 +31,11 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     private dataService: RightSidebarService,
     private configService: ConfigService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private tokenStorage: TokenStorageService,
   ) {}
+
+  username= this.tokenStorage.getUsername();
   notifications: any[] = [
     {
       userImg: 'assets/images/user/user1.jpg',

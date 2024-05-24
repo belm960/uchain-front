@@ -6,7 +6,7 @@
       <a href="#" onClick="return false;" class="bars" (click)="mobileMenuSidebarOpen($event,'overlay-open')"></a>
       <a class="navbar-brand" routerLink={{homePage}}>
         <img src="assets/images/logo.png" alt="" />
-        <span class="logo-name">Cliniva</span>
+        <span class="logo-name">U-Chain</span>
       </a>
     </div>
     <div class="collapse navbar-collapse" [ngbCollapse]="isNavbarCollapsed">
@@ -40,7 +40,7 @@
                       <img src="{{notification.userImg}}" alt="">
                     </span>
                     <span class="menu-info">
-                      <span class="menu-title">{{notification.userName}}</span>
+                      <span class="menu-title">{{username}}</span>
                       <span class="menu-desc">
                         <i class="material-icons">access_time</i> {{notification.time}}
                       </span>
@@ -57,7 +57,7 @@
         <!-- #END# Notifications-->
         <li class="nav-item user_profile" ngbDropdown>
           <a href="#" onClick="return false;" ngbDropdownToggle role="button" class="nav-notification-icons pt-0">
-            <img src={{userImg}} class="rounded-circle" width="32" height="32" alt="User">
+            <b>{{username}}</b>
           </a>
           <div ngbDropdownMenu class="notification-dropdown pullDown">
             <div class="noti-list" style="position: relative; max-width: 600px; max-height: 300px;" [perfectScrollbar]>

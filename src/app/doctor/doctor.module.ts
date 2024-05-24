@@ -27,7 +27,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AppointmentsComponent } from './appointments/appointments.component';
 import { FormComponent } from './appointments/form/form.component';
 import { DoctorsComponent } from './doctors/doctors.component';
-import { PatientsComponent } from './patients/patients.component';
 import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
@@ -36,7 +35,6 @@ import { SettingsComponent } from './settings/settings.component';
     AppointmentsComponent,
     FormComponent,
     DoctorsComponent,
-    PatientsComponent,
     SettingsComponent,
   ],
   imports: [
