@@ -23,6 +23,10 @@ export class ProductService {
     const getMyProductUrl = apiUrl+'products';
     return this.httpClient.get<Product[]>(getMyProductUrl);
   }
+  getOneProduct(id){
+    const getOneProductUrl = apiUrl+'product/'+id;
+    return this.httpClient.get<Product>(getOneProductUrl);
+  }
   addProduct(formData: FormData): Observable<string> {
     const addProductUrl = apiUrl+'product/create';
     return this.httpClient.post<string>(addProductUrl, formData);

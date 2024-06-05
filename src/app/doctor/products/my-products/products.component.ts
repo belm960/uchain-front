@@ -4,6 +4,7 @@ import { Product } from '../product.model';
 import { FormDialogComponent } from '../dialog/form-dialog/form-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-patients',
@@ -13,7 +14,7 @@ import { MatDialog } from '@angular/material/dialog';
 export class ProductsComponent implements OnInit {
   products: Product[];
 
-  constructor(private productService: ProductService, private snackBar: MatSnackBar,public dialog: MatDialog,) { this.getProduct()}
+  constructor(private productService: ProductService,private router: Router, private snackBar: MatSnackBar,public dialog: MatDialog,) { this.getProduct()}
 
   ngOnInit(): void {
   }
@@ -26,6 +27,10 @@ export class ProductsComponent implements OnInit {
           console.log("Can't get Product")
       }
     );
+  }
+
+  productDetail(id) {
+    this.router.navigate([`/doctor/products/product-profile/${id}`]);
   }
   editProduct(product) {
     const dialogRef = this.dialog.open(FormDialogComponent, {

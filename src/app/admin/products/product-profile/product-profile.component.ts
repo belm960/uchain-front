@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from '../product.service';
 import { Product } from '../product.model';
 import { ActivatedRoute } from '@angular/router';
+import { ProductService } from 'src/app/doctor/products/product.service';
 
 @Component({
   selector: 'app-patient-profile',

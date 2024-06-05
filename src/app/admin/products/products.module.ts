@@ -19,20 +19,14 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { ProductsRoutingModule } from './products-routing.module';
-import { AddProductComponent } from './add-product/add-product.component';
-import { ProductsComponent } from './my-products/products.component';
+import { ProductComponent } from './product/product.component';
 import { ProductProfileComponent } from './product-profile/product-profile.component';
-import { FormDialogComponent } from './dialog/form-dialog/form-dialog.component';
-import { DeleteComponent } from './dialog/delete/delete.component';
 
 
 @NgModule({
   declarations: [
-    AddProductComponent,
-    ProductsComponent,
-    ProductProfileComponent,
-    FormDialogComponent,
-    DeleteComponent
+    ProductComponent,
+    ProductProfileComponent
   ],
   imports: [
     CommonModule,
