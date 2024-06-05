@@ -39,4 +39,8 @@ export class ProductService {
     const deleteProductUrl = apiUrl+'product/'+id+'/destroy';
     return this.httpClient.delete(deleteProductUrl);
     }
+  addOrder(data): Observable<string> {
+    const addOrderUrl = apiUrl+'order/create';
+    return this.httpClient.post<string>(addOrderUrl, data);
+    }
 }

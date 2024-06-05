@@ -21,13 +21,18 @@ import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { ProductsRoutingModule } from './products-routing.module';
 import { ProductComponent } from './product/product.component';
 import { ProductProfileComponent } from './product-profile/product-profile.component';
+import { FormDialogComponent } from './dialog/form-dialog/form-dialog.component';
+import { DeleteComponent } from './dialog/delete/delete.component';
 
 
 @NgModule({
   declarations: [
     ProductComponent,
-    ProductProfileComponent
+    ProductProfileComponent,
+    FormDialogComponent,
+    DeleteComponent
   ],
+  
   imports: [
     CommonModule,
     ProductsRoutingModule,
