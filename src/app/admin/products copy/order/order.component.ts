@@ -22,7 +22,7 @@ export class OrderComponent implements OnInit {
     this.orderService.getMyOrder().subscribe(
       data=>{
         data.forEach((value)=>{
-          if(value.buyer==id){
+          if(value.buyer==id && value.status=='Pending' && value.driver == null){
             this.orders.push(value);
           }
         });

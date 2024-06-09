@@ -161,7 +161,7 @@ export const ROUTES: RouteInfo[] = [
         submenu: [],
       },
       {
-        path: '/admin/orders/order',
+        path: '/admin/orders/accepted_order',
         title: 'Accepted',
         moduleName: 'order',
         iconType: '',
@@ -174,7 +174,7 @@ export const ROUTES: RouteInfo[] = [
         submenu: [],
       },
       {
-        path: '/admin/orders/order',
+        path: '/admin/orders/shipped_order',
         title: 'Shipped',
         moduleName: 'order',
         iconType: '',
@@ -559,7 +559,7 @@ export const ROUTES: RouteInfo[] = [
         submenu: [],
       },
       {
-        path: '/doctor/orders/order',
+        path: '/doctor/orders/accepted_order',
         title: 'Accepted',
         moduleName: 'order',
         iconType: '',
@@ -731,7 +731,7 @@ export const ROUTES: RouteInfo[] = [
         submenu: [],
       },
       {
-        path: '/patient/orders/order',
+        path: '/patient/orders/accepted_order',
         title: 'Accepted',
         moduleName: 'order',
         iconType: '',

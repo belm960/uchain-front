@@ -23,6 +23,9 @@ import { OrderComponent } from './order/order.component';
 import { OrderProfileComponent } from './order-profile/order-profile.component';
 import { FormDialogComponent } from './dialog/form-dialog/form-dialog.component';
 import { DeleteComponent } from './dialog/delete/delete.component';
+import { AcceptedOrderComponent } from './accepted_order/accepted_order/accepted_order.component';
+import { AcceptedOrderProfileComponent } from './accepted_order/accepted_order_profile/accepted_order-profile.component';
+import { ShipOrderComponent } from './accepted_order/ship_order/ship_order.component';
 
 
 @NgModule({
@@ -30,7 +33,10 @@ import { DeleteComponent } from './dialog/delete/delete.component';
     OrderComponent,
     OrderProfileComponent,
     FormDialogComponent,
-    DeleteComponent
+    DeleteComponent,
+    AcceptedOrderComponent,
+    AcceptedOrderProfileComponent,
+    ShipOrderComponent,
   ],
   
   imports: [
