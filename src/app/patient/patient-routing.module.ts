@@ -19,6 +19,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'orders',
+    loadChildren: () =>
+      import('./orders/order.module').then(
+        (m) => m.OrderModule
+      ),
+  },
+  {
     path: 'prescriptions',
     component: PrescriptionsComponent,
   },

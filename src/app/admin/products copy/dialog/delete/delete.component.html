@@ -3,19 +3,19 @@
   <div mat-dialog-content>
     <ul class="clearfix">
       <li>
-        <p><span class="font-weight-bold"> Product Name: </span>{{data.product.name}}</p>
+        <p><span class="font-weight-bold"> Product Name: </span>{{data.order.product[0].name}}</p>
       </li>
       <li>
-        <p><span class="font-weight-bold"> Product Type: </span>{{data.product.product_type}}</p>
+        <p><span class="font-weight-bold"> Product Type: </span>{{ data.order.product[0].product_type}}</p>
       </li>
       <li>
         <p>
-          <span class="font-weight-bold">Quantity: </span>{{data.product.quantity}}
+          <span class="font-weight-bold">Order Quantity: </span>{{data.order.quantity}}
         </p>
       </li>
       <li>
         <p>
-          <span class="font-weight-bold">Price Per Unit: </span>{{data.product.price}}
+          <span class="font-weight-bold">Price per Unit: </span>{{data.order.product[0].price}}
         </p>
       </li>
     </ul>

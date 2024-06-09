@@ -5,8 +5,8 @@
         (click)="isNavbarCollapsed = !isNavbarCollapsed" aria-expanded="false"></a>
       <a href="#" onClick="return false;" class="bars" (click)="mobileMenuSidebarOpen($event,'overlay-open')"></a>
       <a class="navbar-brand" routerLink={{homePage}}>
-        <img src="assets/images/logo.png" alt="" />
-        <span class="logo-name">U-Chain</span>
+        <img src="assets/images/logo.png" alt=""  width="30px" height="30px"/>
+        <span class="logo-name" style="color: rgb(51, 159, 51);">U-Chain</span>
       </a>
     </div>
     <div class="collapse navbar-collapse" [ngbCollapse]="isNavbarCollapsed">

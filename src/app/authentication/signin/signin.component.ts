@@ -54,6 +54,7 @@ export class SigninComponent implements OnInit {
           
           this.tokenStorage.saveToken(data.token);
           this.tokenStorage.saveUsername(data.user['username']);
+          this.tokenStorage.saveId(data.user['id'] as string);
           console.log(data.user);
           this.tokenStorage.saveAuthorities(data.user['is_buyer']==true?'BUYER':data.user['is_seller']==true?'SELLER':data.user['is_driver']==true?'DRIVER':'USER');
    

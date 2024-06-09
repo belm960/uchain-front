@@ -27,6 +27,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./products/products.module').then((m) => m.ProductsModule),
   },
+  {
+    path: 'orders',
+    loadChildren: () =>
+      import('./orders/order.module').then((m) => m.OrderModule),
+  },
   { path: '**', component: Page404Component },
 ];
 
