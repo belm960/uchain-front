@@ -5,6 +5,7 @@ import { apiUrl } from 'src/environments/environment';
 import { TokenStorageService } from 'src/app/shared/security/token-storage.service';
 import { Order } from './order.model';
 import { catchError } from 'rxjs/operators';
+import { User } from 'src/app/shared/security/user';
 @Injectable()
 export class OrderService {
   // Temporarily stores data from dialogs
@@ -39,4 +40,12 @@ export class OrderService {
     const addOrderUrl = apiUrl+'order/create';
     return this.httpClient.post<string>(addOrderUrl, data);
     }
+  deliverOrder(data): Observable<string> {
+    const deliverOrderUrl = apiUrl+'rate/';
+    return this.httpClient.post<string>(deliverOrderUrl, data);
+    }
+  getOneUser(id){
+    const getOneUserUrl = apiUrl+'user/'+id;
+    return this.httpClient.get<User>(getOneUserUrl);
+  }
 }

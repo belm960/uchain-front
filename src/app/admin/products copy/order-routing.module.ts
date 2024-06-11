@@ -7,6 +7,8 @@ import { AcceptedOrderComponent } from './accepted_order/accepted_order/accepted
 import { AcceptedOrderProfileComponent } from './accepted_order/accepted_order_profile/accepted_order-profile.component';
 import { ShippedOrderComponent } from './shipped_order/shipped_order/shipped_order.component';
 import { ShippedOrderProfileComponent } from './shipped_order/shipped_order_profile/shipped_order-profile.component';
+import { DeliveredOrderComponent } from './delivered_order/delivered_order/delivered_order.component';
+import { DeliveredOrderProfileComponent } from './delivered_order/delivered_order_profile/delivered_order-profile.component';
 
 const routes: Routes = [
   {
@@ -28,6 +30,14 @@ const routes: Routes = [
   {
     path: 'shipped_order_profile/:id',
     component: ShippedOrderProfileComponent,
+  },
+  {
+    path: 'delivered_order',
+    component: DeliveredOrderComponent,
+  },
+  {
+    path: 'delivered_order_profile/:id',
+    component: DeliveredOrderProfileComponent,
   },
   {
     path: 'order-profile/:id',

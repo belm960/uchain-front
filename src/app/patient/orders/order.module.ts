@@ -26,6 +26,10 @@ import { DeleteComponent } from './dialog/delete/delete.component';
 import { AcceptedOrderComponent } from './accepted_order/accepted_order/accepted_order.component';
 import { AcceptedOrderProfileComponent } from './accepted_order/accepted_order_profile/accepted_order-profile.component';
 import { ShipOrderComponent } from './accepted_order/ship_order/ship_order.component';
+import { ShippedOrderProfileComponent } from './shipped_order/shipped_order_profile/shipped_order-profile.component';
+import { ShippedOrderComponent } from './shipped_order/shipped_order/shipped_order.component';
+import { DeliveredOrderComponent } from './delivered_order/delivered_order/delivered_order.component';
+import { DeliveredOrderProfileComponent } from './delivered_order/delivered_order_profile/delivered_order-profile.component';
 
 
 @NgModule({
@@ -37,6 +41,10 @@ import { ShipOrderComponent } from './accepted_order/ship_order/ship_order.compo
     AcceptedOrderComponent,
     AcceptedOrderProfileComponent,
     ShipOrderComponent,
+    ShippedOrderComponent,
+    ShippedOrderProfileComponent,
+    DeliveredOrderComponent,
+    DeliveredOrderProfileComponent,
   ],
   
   imports: [

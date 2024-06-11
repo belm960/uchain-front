@@ -17,8 +17,9 @@ import { OrderService } from '../../order.service';
 })
 export class DeliverOrderComponent {
   dialogTitle: string;
-  orderForm: FormGroup;
+  deliverForm: FormGroup;
   order: Order;
+  username: string;
   constructor(
     public dialogRef: MatDialogRef<DeliverOrderComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -27,9 +28,10 @@ export class DeliverOrderComponent {
     private snackBar: MatSnackBar
   ) {
     // Set the defaults
-    this.dialogTitle = data.product.name;
+    this.dialogTitle = data.order.product[0].name;
     this.order = data.order;
-    this.orderForm = this.createContactForm();
+    this.deliverForm = this.createContactForm();
+    this.getUser()
   }
   formControl = new FormControl('', [
     Validators.required,
@@ -43,38 +45,58 @@ export class DeliverOrderComponent {
       : '';
   }
   createContactForm(): FormGroup {
-    return this.orderForm = this.fb.group({
-      quantity: [this.order.quantity, [Validators.required]],
+    return this.deliverForm = this.fb.group({
+      receiver: [this.username],
+      rating_value: ['',[Validators.required]],
+      comment: ['',[Validators.required]],
+      order: [this.order.id],
     });
   }
-  submit() {
-    // emppty stuff
+  getUser(){
+    this.orderService.getOneUser(this.order.product[0].seller).subscribe(
+      data=>{
+        this.username = data.username;
+      }
+      , error =>{
+          console.log("Can't get User")
+      }
+    );
   }
   onNoClick(): void {
     this.dialogRef.close();
   }
+
   onSubmit() {
-      const data = {
-        "quantity": `${this.orderForm.value.quantity}`,
-        "product": [
-          {
-            "id": this.order.product[0].id
-          }
-        ]
-      }
-      this.orderService.addOrder(data).subscribe(
+    const data ={
+      "receiver": this.username,
+      "rating_value": parseInt(this.deliverForm.value.rating_value),
+      "comment": this.deliverForm.value.comment,
+      "order": this.order.id
+    }
+      this.orderService.deliverOrder(data).subscribe(
         _=> {
-            this.showNotification(
-              'snackbar-success',
-              'Order Submitted Successfully...!!!',
-              'bottom',
-              'center'
-            );
+          this.orderService.editOrder({"status": "Delivered"}, this.order.id).subscribe(
+            _=>{
+              this.showNotification(
+                'snackbar-success',
+                'Order Delivered Successfully...!!!',
+                'bottom',
+                'center'
+              );
+            } , _=>{
+              this.showNotification(
+                'snackbar-danger',
+                'Ops! can not Deliver order. Try Again...!!!',
+                'bottom',
+                'center'
+              );
+            }
+          );
           },
         _=> {
           this.showNotification(
             'snackbar-danger',
-            'Ops! can not place order. Try Again...!!!',
+            'Ops! can not Deliver order. Try Again...!!!',
             'bottom',
             'center'
           );
