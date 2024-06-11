@@ -44,6 +44,6 @@ export class DeliveredOrderComponent implements OnInit {
     });
   }
   orderDetail(id) {
-    this.router.navigate([`/patient/orders/delivered_order_profile/${id}`]);
+    this.router.navigate([`/admin/orders/delivered_order_profile/${id}`]);
   }
 }
