@@ -5,6 +5,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { FormDialogComponent } from '../../dialog/form-dialog/form-dialog.component';
 import { OrderService } from '../../../../admin/products copy/order.service';
+import { UserService } from 'src/app/shared/security/user.service';
+import { Rate } from 'src/app/shared/security/rate';
 
 @Component({
   selector: 'app-order-profile',
@@ -12,19 +14,29 @@ import { OrderService } from '../../../../admin/products copy/order.service';
   styleUrls: ['./accepted_order-profile.component.sass']
 })
 export class AcceptedOrderProfileComponent implements OnInit {
-  order: Order = new Order();
-  orderId: any;
-  constructor(private orderService: OrderService, private route: ActivatedRoute,private snackBar: MatSnackBar,public dialog: MatDialog) {
+  order: Order = new Order()
+  orderId: any
+  rate: Rate[]
+  stars: boolean[] = Array(5).fill(false);
+  constructor(private orderService: OrderService,private userService: UserService ,private route: ActivatedRoute,private snackBar: MatSnackBar,public dialog: MatDialog) {
     this.orderId=this.route.snapshot.paramMap.get('id');
     console.log(this.orderId)
     this.getOrder(this.orderId);
   }
   ngOnInit(): void {
   }
+  getComments(id){
+    this.userService.getOneUser(id).subscribe(
+      data=>{
+        this.rate =this.userService.getSellerComments(data.username);
+      }
+    )
+  }
   getOrder(id){
     this.orderService.getOneOrder(id).subscribe(
       data=>{
           this.order = data;
+          this.getComments(data.product[0].seller)
         }
       , error =>{
           console.log("Can't get Order")

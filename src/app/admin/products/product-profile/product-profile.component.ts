@@ -5,6 +5,9 @@ import { ProductService } from 'src/app/doctor/products/product.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { FormDialogComponent } from '../dialog/form-dialog/form-dialog.component';
+import { UserService } from 'src/app/shared/security/user.service';
+import { Rate } from 'src/app/shared/security/rate';
+import { User } from 'src/app/shared/security/user';
 
 @Component({
   selector: 'app-patient-profile',
@@ -14,17 +17,29 @@ import { FormDialogComponent } from '../dialog/form-dialog/form-dialog.component
 export class ProductProfileComponent implements OnInit {
   product: Product = new Product();
   productId: any;
-  constructor(private productService: ProductService, private route: ActivatedRoute,private snackBar: MatSnackBar,public dialog: MatDialog) {
+  rate: Rate[]
+  stars: boolean[] = Array(5).fill(false);
+  user: User
+  constructor(private productService: ProductService, private userService: UserService,private route: ActivatedRoute,private snackBar: MatSnackBar,public dialog: MatDialog) {
     this.productId=this.route.snapshot.paramMap.get('id');
     console.log(this.productId)
     this.getProduct(this.productId);
   }
   ngOnInit(): void {
   }
+  getComments(id){
+    this.userService.getOneUser(id).subscribe(
+      data=>{
+        this.rate =this.userService.getSellerComments(data.username)
+        this.user = data
+      }
+    )
+  }
   getProduct(id){
     this.productService.getOneProduct(id).subscribe(
       data=>{
         this.product = data;
+        this.getComments(data.seller)
       }
       , error =>{
           console.log("Can't get Product")

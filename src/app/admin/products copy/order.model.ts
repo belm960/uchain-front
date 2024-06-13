@@ -18,4 +18,7 @@ export class Order{
         ];
         driver: number;
         buyer: number;
+        numberOfRating: number;
+        userRating: number;
+        rating: any[]
 }

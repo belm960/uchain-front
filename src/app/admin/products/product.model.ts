@@ -6,4 +6,5 @@ export class Product{
     quantity: string;
     product_type: string;
     image: string;
+    seller: number;
 }

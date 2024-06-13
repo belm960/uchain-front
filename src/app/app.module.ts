@@ -51,6 +51,7 @@ import { ClickOutsideModule } from "ng-click-outside";
 import { httpInterceptorProviders } from './shared/security/auth-interceptor';
 import { ProductService } from "./doctor/products/product.service";
 import { OrderService } from "./admin/products copy/order.service";
+import { UserService } from "./shared/security/user.service";
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -113,6 +114,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     AuthGuard,
     ProductService,
     OrderService,
+    UserService,
   ],
   entryComponents: [
     SimpleDialogComponent,

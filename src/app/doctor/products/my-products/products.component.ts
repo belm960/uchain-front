@@ -5,6 +5,7 @@ import { FormDialogComponent } from '../dialog/form-dialog/form-dialog.component
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { TokenStorageService } from 'src/app/shared/security/token-storage.service';
 
 @Component({
   selector: 'app-patients',
@@ -12,16 +13,21 @@ import { Router } from '@angular/router';
   styleUrls: ['./products.component.sass']
 })
 export class ProductsComponent implements OnInit {
-  products: Product[];
+  products: Product[]=[];
 
-  constructor(private productService: ProductService,private router: Router, private snackBar: MatSnackBar,public dialog: MatDialog,) { this.getProduct()}
+  constructor(private productService: ProductService,private tokenStorageService: TokenStorageService, private router: Router, private snackBar: MatSnackBar,public dialog: MatDialog,) { this.getProduct()}
 
   ngOnInit(): void {
   }
   getProduct(){
+    const userId =this.tokenStorageService.getId();
     this.productService.getMyProduct().subscribe(
       data=>{
-        this.products = data;
+        data.forEach((value)=>{
+          if(value.seller==+userId){
+            this.products.push(value)
+          }
+        })
       }
       , error =>{
           console.log("Can't get Product")

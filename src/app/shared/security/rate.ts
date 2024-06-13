@@ -5,4 +5,5 @@ export class Rate {
   rating_value: string;
   cooment: string;
   order: number;
+  timestamp: Date;
 }

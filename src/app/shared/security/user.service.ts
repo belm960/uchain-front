@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { HttpClient} from '@angular/common/http';
+import { BehaviorSubject} from 'rxjs';
 import { apiUrl } from 'src/environments/environment';
 import { TokenStorageService } from 'src/app/shared/security/token-storage.service';
-import { catchError } from 'rxjs/operators';
 import { User } from 'src/app/shared/security/user';
 import { Rate } from './rate';
 @Injectable()
@@ -15,6 +14,7 @@ export class UserService {
   >([]);
   rate: Rate[] = [];
   totalRate: number = 0;
+  counter: number = 0;
   constructor(private httpClient: HttpClient,  private tokenStorage: TokenStorageService) {}
   get data(): User[] {
     return this.dataChange.value;
@@ -33,10 +33,28 @@ export class UserService {
   getSellerRating(username: string): number{
     this.getRatings().subscribe(
       data=>{
-        this.totalRate = 0;
+        this.totalRate = 0
+        this.counter = 0
         data.forEach(element => {
           if(element.receiver == username){
             this.totalRate+=+element.rating_value
+            this.counter++
+          }
+        });
+        this.totalRate/=this.counter
+      },_=>{
+        console.log('Cant get Ratings')
+      }
+    )
+    return this.totalRate
+  }
+  getNumberOfRating(username: string): number{
+    this.getRatings().subscribe(
+      data=>{
+        this.totalRate = 0;
+        data.forEach(element => {
+          if(element.receiver == username){
+            this.totalRate++
           }
         });
       },_=>{
@@ -58,5 +76,4 @@ export class UserService {
     )
     return this.rate;
   }
-
 }
