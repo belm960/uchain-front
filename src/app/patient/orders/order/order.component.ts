@@ -27,6 +27,9 @@ export class OrderComponent implements OnInit {
       data=>{
         data.forEach((value)=>{
           if(value.driver==null){
+            if(value.product[0].image.includes("127.0.0.1:8000")){
+              value.product[0].image =value.product[0].image.substring(21)
+            }
             this.orders.push(value)
             }
           }

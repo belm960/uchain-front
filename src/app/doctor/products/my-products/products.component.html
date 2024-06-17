@@ -20,7 +20,7 @@
       <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" *ngFor="let product of products">
         <div class="card py-3 py-md-3">
           <div class=" d-flex justify-content-between px-3 px-md-4">
-            <img src="assets/images/user/usrbig1.jpg" height="55sspx" width="55px" alt="" class="rounded-circle">
+            <img src="../../../{{product.image}}" height="55sspx" width="55px" alt="" class="rounded-circle">
             <div class="">
               <h6 class="col-green">{{product.name}}</h6>
               <p>Product Type: {{product.product_type}}</p>

@@ -76,6 +76,17 @@
                 </div>
               </div>
               <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                  <mat-form-field class="example-full-width mb-3">
+                    <mat-label>Location</mat-label>
+                    <input matInput formControlName="location" type="text" required>
+                    <mat-error *ngIf="productForm.get('location').hasError('required')">
+                      Location is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
                   <mat-form-field class="example-full-width mb-3">
                     <mat-label>Descritpion</mat-label>

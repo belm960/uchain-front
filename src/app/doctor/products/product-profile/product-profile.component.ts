@@ -21,6 +21,9 @@ export class ProductProfileComponent implements OnInit {
   getProduct(id){
     this.productService.getOneProduct(id).subscribe(
       data=>{
+        if(data.image.includes("127.0.0.1:8000")){
+          data.image = data.image.substring(21)
+        }
         this.product = data;
       }
       , error =>{

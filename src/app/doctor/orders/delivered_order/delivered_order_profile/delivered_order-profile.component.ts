@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { OrderService } from 'src/app/admin/products copy/order.service';
 import { UserService } from 'src/app/shared/security/user.service';
 import { Rate } from 'src/app/shared/security/rate';
+import { User } from 'src/app/shared/security/user';
 
 @Component({
   selector: 'app-delivered_order-profile',
@@ -17,6 +18,8 @@ export class DeliveredOrderProfileComponent implements OnInit {
   orderId: any;
   rate: Rate[]
   stars: boolean[] = Array(5).fill(false);
+  buyer: User = new User()
+  driver: User = new User()
   constructor(private orderService: OrderService,private userService: UserService, private route: ActivatedRoute,private snackBar: MatSnackBar,public dialog: MatDialog) {
     this.orderId=this.route.snapshot.paramMap.get('id');
     console.log(this.orderId)
@@ -31,11 +34,42 @@ export class DeliveredOrderProfileComponent implements OnInit {
       }
     )
   }
+  getBuyer(id){
+    this.userService.getOneUser(id).subscribe(
+      data=>{
+        this.buyer = data
+        if(this.buyer.profile_image.includes("127.0.0.1:8000")){
+          this.buyer.profile_image = this.buyer.profile_image.substring(21)
+        }
+      },
+      _=>{
+        console.log("error here")
+      }
+    )
+  }
+  getDriver(id){
+    this.userService.getOneUser(id).subscribe(
+      data=>{
+        this.driver = data
+        if(this.driver.profile_image.includes("127.0.0.1:8000")){
+          this.driver.profile_image = this.driver.profile_image.substring(21)
+        }
+      },
+      _=>{
+        console.log("error here")
+      }
+    )
+  }
   getOrder(id){
     this.orderService.getOneOrder(id).subscribe(
       data=>{
           this.order = data;
           this.getComments(data.product[0].seller)
+          this.getBuyer(data.buyer)
+          this.getDriver(data.driver)
+          if(data.product[0].image.includes("127.0.0.1:8000")){
+            data.product[0].image = data.product[0].image.substring(21)
+          }
         }
       , error =>{
           console.log("Can't get Order")

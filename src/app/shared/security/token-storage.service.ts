@@ -33,6 +33,14 @@ export class TokenStorageService {
   public getUsername(): string {
     return sessionStorage.getItem(USERNAME_KEY);
   }
+  public saveProfileImage(username: string) {
+    window.sessionStorage.removeItem('PROFILE_KEY');
+    window.sessionStorage.setItem('PROFILE_KEY', username);
+  }
+ 
+  public getProfileImage(): string {
+    return sessionStorage.getItem('PROFILE_KEY');
+  }
   public saveId(username: string) {
     window.sessionStorage.removeItem(ID_KEY);
     window.sessionStorage.setItem(ID_KEY, username);
@@ -49,5 +57,28 @@ export class TokenStorageService {
     if (sessionStorage.getItem(TOKEN_KEY)) {
       return sessionStorage.getItem(AUTHORITIES_KEY)
     }
+  }
+
+  public saveQuantity(quantity: string) {
+    window.sessionStorage.removeItem('quan_key');
+    window.sessionStorage.setItem('quan_key', quantity);
+  }
+  public getQuantity(): string {
+    return sessionStorage.getItem('quan_key');
+  }
+  public saveTxRef(tx_ref: string) {
+    window.sessionStorage.removeItem('ref_key');
+    window.sessionStorage.setItem('ref_key', tx_ref);
+  }
+  public getTxRef(): string {
+    return sessionStorage.getItem('ref_key');
+  }
+
+  public savePId(PId: string) {
+    window.sessionStorage.removeItem('PId_key');
+    window.sessionStorage.setItem('PId_key', PId);
+  }
+  public getPId(): string {
+    return sessionStorage.getItem('PId_key');
   }
 }

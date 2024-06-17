@@ -23,12 +23,16 @@ export class UserService {
     return this.dialogData
   }
   getOneUser(id){
-    const getOneUserUrl = apiUrl+'user/'+id;
-    return this.httpClient.get<User>(getOneUserUrl);
+    const getOneUserUrl = apiUrl+'user/'+id
+    return this.httpClient.get<User>(getOneUserUrl)
+  }
+  getUsers(){
+    const userUrl = apiUrl + 'user/all'
+    return this.httpClient.get<User[]>(userUrl)
   }
   getRatings(){
     const getOneProductUrl = apiUrl+'ratings/'
-    return this.httpClient.get<Rate[]>(getOneProductUrl);
+    return this.httpClient.get<Rate[]>(getOneProductUrl)
   }
   getSellerRating(username: string): number{
     this.getRatings().subscribe(

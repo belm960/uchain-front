@@ -6,6 +6,8 @@ import { TokenStorageService } from 'src/app/shared/security/token-storage.servi
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { ShipOrderComponent } from '../ship_order/ship_order.component';
+import Swal from 'sweetalert2';
+import { delay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-accepted_order',
@@ -26,6 +28,9 @@ export class AcceptedOrderComponent implements OnInit {
       data=>{
         data.forEach((value)=>{
           if(value.driver!=null && value.driver==id && value.status=='Pending'){
+            if(value.product[0].image.includes("127.0.0.1:8000")){
+              value.product[0].image =value.product[0].image.substring(21)
+            }
             this.orders.push(value)
             }
           }
@@ -36,8 +41,32 @@ export class AcceptedOrderComponent implements OnInit {
       }
     );
   }
+  cancelOrder(order: Order) {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "Want to cancelorder!",
+      icon: 'success',
+      showCancelButton: true,
+      confirmButtonColor: '#55ffaa',
+      cancelButtonColor: '#0fa',
+      confirmButtonText: 'Say Hello!'
+    }).then(result => {
+      if (result.value) {
+        this.orderService.editOrder({"driver": 0}, order.id).subscribe(
+          data=>{
+            Swal.fire('Done!', 'You have cancelled an Order.', 'success');
+            delay(2000)
+          }
+          ,
+          _=>{
+            Swal.fire('Ops!', 'There is Some error try again.', 'error');
+          }
+        )
+      }
+    });
+  }
   orderDetail(id) {
-    this.router.navigate([`/patient/orders/order-profile/${id}`]);
+    this.router.navigate([`/patient/orders/accepted_order_profile/${id}`]);
   }
   shipOrder(order) {
     const dialogRef = this.dialog.open(ShipOrderComponent, {

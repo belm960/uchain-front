@@ -23,6 +23,7 @@ import { ProductComponent } from './product/product.component';
 import { ProductProfileComponent } from './product-profile/product-profile.component';
 import { FormDialogComponent } from './dialog/form-dialog/form-dialog.component';
 import { DeleteComponent } from './dialog/delete/delete.component';
+import { PayComponent } from './dialog/pay/pay.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { DeleteComponent } from './dialog/delete/delete.component';
     ProductComponent,
     ProductProfileComponent,
     FormDialogComponent,
-    DeleteComponent
+    DeleteComponent,
+    PayComponent
   ],
   
   imports: [

@@ -27,7 +27,7 @@ export class FormDialogComponent {
     private snackBar: MatSnackBar
   ) {
     // Set the defaults
-    this.dialogTitle = data.product.name;
+    this.dialogTitle = data.order.product[0].name;
     this.order = data.order;
     this.orderForm = this.createContactForm();
   }

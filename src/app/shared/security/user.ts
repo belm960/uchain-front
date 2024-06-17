@@ -16,5 +16,8 @@ export class User {
    profile_image: string;
    buyer_profile: any;
    seller_profile: any;
-   driver_profile: any;  
+   driver_profile: {
+      license_number: string;
+      car_model: string; 
+   }
 }

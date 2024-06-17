@@ -11,6 +11,7 @@ import {
 import { ROUTES } from './sidebar-items';
 import { AuthService } from 'src/app/shared/security/auth.service';
 import { Role } from '../../shared/security/role';
+import { TokenStorageService } from 'src/app/shared/security/token-storage.service';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -35,7 +36,8 @@ export class SidebarComponent implements OnInit {
     private renderer: Renderer2,
     public elementRef: ElementRef,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private tokenStorageService: TokenStorageService
   ) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
@@ -83,7 +85,8 @@ export class SidebarComponent implements OnInit {
     if (this.authService.isLoggedIn()) {
       const userRole = this.authService.getRole();
       this.userFullName = this.authService.getUserFullName();
-      this.userImg = this.authService.getUserImg();
+      this.userImg = this.tokenStorageService.getProfileImage();
+      console.log(this.userImg)
 
       this.sidebarItems = ROUTES.filter(
         (x) => x.role.indexOf(userRole) !== -1 || x.role.indexOf('All') !== -1

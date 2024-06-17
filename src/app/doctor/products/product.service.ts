@@ -43,4 +43,21 @@ export class ProductService {
     const addOrderUrl = apiUrl+'order/create';
     return this.httpClient.post<string>(addOrderUrl, data);
     }
+  pay(price,username): Observable<any> {
+    const verifyUrl = apiUrl+'pay/';
+    return this.httpClient.post<string>(verifyUrl, {
+      "email":"samuel@gmail.com",
+      "amount":price,
+      "first_name":username,
+      "last_name":username,
+      "return_url": "http://localhost:4200/#/admin/products/product-profile/0"
+    });
+    }
+  verify(tx_ref: string): Observable<any> {
+    const formData = new FormData();
+    formData.append('tx_ref',tx_ref)
+    const verifyUrl = apiUrl+'pay/verify';
+    console.log(tx_ref)
+    return this.httpClient.post<string>(verifyUrl, formData);
+    }  
 }

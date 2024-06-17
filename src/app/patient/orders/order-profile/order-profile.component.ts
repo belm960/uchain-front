@@ -35,6 +35,9 @@ export class OrderProfileComponent implements OnInit {
   getOrder(id){
     this.orderService.getOneOrder(id).subscribe(
       data=>{
+        if(data.product[0].image.includes("127.0.0.1:8000")){
+          data.product[0].image = data.product[0].image.substring(21)
+        }
           this.order = data;
           this.getComments(data.product[0].seller)
         }

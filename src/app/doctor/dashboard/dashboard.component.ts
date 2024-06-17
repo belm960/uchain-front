@@ -14,6 +14,9 @@ import {
   ApexNonAxisChartSeries,
   ApexFill,
 } from 'ng-apexcharts';
+import { OrderService } from 'src/app/admin/products copy/order.service';
+import { TokenStorageService } from 'src/app/shared/security/token-storage.service';
+import { Data } from 'src/app/admin/dashboard/dashboard2/data';
 export type areaChartOptions = {
   series: ApexAxisChartSeries;
   chart: ApexChart;
@@ -53,99 +56,60 @@ export type radialChartOptions = {
   styleUrls: ['./dashboard.component.sass'],
 })
 export class DashboardComponent implements OnInit {
-  @ViewChild('chart') chart: ChartComponent;
-  public areaChartOptions: Partial<areaChartOptions>;
-  public radialChartOptions: Partial<radialChartOptions>;
-  public linechartOptions: Partial<linechartOptions>;
-  constructor() {}
-  // TODO start
-  tasks = [
-    {
-      id: '1',
-      title: 'Check patient report',
-      done: true,
-      priority: 'High',
-    },
-    {
-      id: '2',
-      title: 'Request for festivle holiday',
-      done: false,
-      priority: 'High',
-    },
-    {
-      id: '3',
-      title: 'Order new medicine stock',
-      done: false,
-      priority: 'Low',
-    },
-    {
-      id: '4',
-      title: 'Remind for lunch in hotel',
-      done: true,
-      priority: 'Normal',
-    },
-    {
-      id: '5',
-      title: 'Conference in london',
-      done: false,
-      priority: 'High',
-    },
-    {
-      id: '6',
-      title: 'Announcement for',
-      done: false,
-      priority: 'Normal',
-    },
-    {
-      id: '7',
-      title: 'call bus driver',
-      done: true,
-      priority: 'High',
-    },
-    {
-      id: '8',
-      title: 'Web service data load issue',
-      done: false,
-      priority: 'High',
-    },
-    {
-      id: '9',
-      title: 'Java compile error',
-      done: false,
-      priority: 'Low',
-    },
-    {
-      id: '10',
-      title: 'Integrate project with spring boot',
-      done: true,
-      priority: 'High',
-    },
-  ];
-
-  drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.tasks, event.previousIndex, event.currentIndex);
-  }
-
-  toggle(task, nav: any) {
-    task.done = !task.done;
-  }
-  // TODO end
+  @ViewChild('chart') chart: ChartComponent
+  public areaChartOptions: Partial<areaChartOptions>
+  public radialChartOptions: Partial<radialChartOptions>
+  public linechartOptions: Partial<linechartOptions>
+  newOrders: number = 0
+  acceptedOrders: number= 0
+  shippedOrders:number =0
+  deliveredOrders: number = 0
+  data: Data = new Data()
+  constructor(private orderService: OrderService, private tokenStorage: TokenStorageService) {}
 
   ngOnInit() {
-    this.chart1();
-    this.chart2();
-    this.chart3();
+    this.getOrder()
+    this.chart1()
+    this.chart2()
   }
   private chart1() {
     this.areaChartOptions = {
       series: [
         {
-          name: 'New Patients',
-          data: [31, 40, 28, 51, 42, 85, 77],
+          name: 'AA COFFEE',
+          data: [
+            this.data.dataAACoffee[16].price,
+            this.data.dataAACoffee[17].price,
+            this.data.dataAACoffee[18].price,
+            this.data.dataAACoffee[19].price,
+            this.data.dataAACoffee[20].price,
+            this.data.dataAACoffee[21].price,
+            this.data.dataAACoffee[22].price,
+          ],
         },
         {
-          name: 'Old Patients',
-          data: [11, 32, 45, 32, 34, 52, 41],
+          name: 'AB COFFEE',
+          data: [
+            this.data.dataCoffeeAB[16].price,
+            this.data.dataCoffeeAB[17].price,
+            this.data.dataCoffeeAB[18].price,
+            this.data.dataCoffeeAB[19].price,
+            this.data.dataCoffeeAB[20].price,
+            this.data.dataCoffeeAB[21].price,
+            this.data.dataCoffeeAB[22].price,
+          ],
+        },
+        {
+          name: 'C COFFEE',
+          data: [
+            this.data.dataCoffeeC[16].price,
+            this.data.dataCoffeeC[17].price,
+            this.data.dataCoffeeC[18].price,
+            this.data.dataCoffeeC[19].price,
+            this.data.dataCoffeeC[20].price,
+            this.data.dataCoffeeC[21].price,
+            this.data.dataCoffeeC[22].price,
+          ],
         },
       ],
       chart: {
@@ -156,7 +120,7 @@ export class DashboardComponent implements OnInit {
         },
         foreColor: '#9aa0ac',
       },
-      colors: ['#7D4988', '#66BB6A'],
+      colors: ['#7D4988', '#66BB6A', '#66BB9C'],
       dataLabels: {
         enabled: false,
       },
@@ -164,35 +128,35 @@ export class DashboardComponent implements OnInit {
         curve: 'smooth',
       },
       xaxis: {
-        type: 'datetime',
         categories: [
-          '2018-09-19T00:00:00.000Z',
-          '2018-09-19T01:30:00.000Z',
-          '2018-09-19T02:30:00.000Z',
-          '2018-09-19T03:30:00.000Z',
-          '2018-09-19T04:30:00.000Z',
-          '2018-09-19T05:30:00.000Z',
-          '2018-09-19T06:30:00.000Z',
+          "Day One",
+          "Day Two",
+          "Day Three",
+          "Day Four",
+          "Day Five",
+          "Day Six",
+          "Day Seven",
         ],
       },
       legend: {
         show: true,
         position: 'top',
         horizontalAlign: 'center',
-        offsetX: 0,
-        offsetY: 0,
+        offsetX: 0.1,
+        offsetY: 0.1,
       },
 
       tooltip: {
         x: {
-          format: 'dd/MM/yy HH:mm',
         },
       },
     };
   }
   private chart2() {
     this.radialChartOptions = {
-      series: [44, 55, 67],
+      series: [this.data.dataAACoffee[18].price,
+               this.data.dataCoffeeAB[18].price,
+               this.data.dataCoffeeC[18].price],
       chart: {
         height: 265,
         type: 'radialBar',
@@ -207,71 +171,39 @@ export class DashboardComponent implements OnInit {
               fontSize: '16px',
             },
             total: {
-              show: true,
-              label: 'Total',
-              formatter: function (w) {
-                return '249';
-              },
+              show: false,
             },
           },
         },
       },
-      colors: ['#ffc107', '#3f51b5', '#8bc34a'],
+      colors: ['green', '#3f51b5', 'red'],
 
-      labels: ['Face TO Face', 'E-Consult', 'Available'],
+      labels: ['AA COFFEE', 'AB COFFEE', 'C COFFEE'],
     };
   }
-  private chart3() {
-    this.linechartOptions = {
-      series: [
-        {
-          name: 'Male',
-          data: [44, 55, 57, 56, 61, 58],
-        },
-        {
-          name: 'Female',
-          data: [76, 85, 101, 98, 87, 105],
-        },
-      ],
-      chart: {
-        type: 'bar',
-        height: 350,
-        dropShadow: {
-          enabled: true,
-          color: '#000',
-          top: 18,
-          left: 7,
-          blur: 10,
-          opacity: 0.2,
-        },
-        toolbar: {
-          show: false,
-        },
-        foreColor: '#9aa0ac',
-      },
-      colors: ['#5C9FFB', '#AEAEAE'],
-      plotOptions: {
-        bar: {
-          horizontal: false,
-          columnWidth: '55%',
-          endingShape: 'rounded',
-        },
-      },
-      dataLabels: {
-        enabled: false,
-      },
-      stroke: {
-        show: true,
-        width: 2,
-        colors: ['transparent'],
-      },
-      xaxis: {
-        categories: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-      },
-      yaxis: {},
-      fill: {
-        opacity: 1,
-      },
-    };
+  getOrder(){
+    const id = parseInt(this.tokenStorage.getId())
+    this.orderService.getMyOrder().subscribe(
+      data=>{
+        data.forEach((value)=>{
+          if(value.driver==null && value.product[0].seller==id && value.status=='Pending'){
+              this.newOrders+=1
+            }else 
+          if(value.driver!=null && value.product[0].seller==id && value.status=='Pending'){
+              this.acceptedOrders+=1
+            }else 
+          if(value.driver!=null && value.product[0].seller==id && value.status=='Shipped'){
+              this.shippedOrders+=1
+            }else 
+          if(value.driver!=null && value.product[0].seller==id && value.status=='Delivered'){
+            this.deliveredOrders+=1
+          }
+          }
+        );
+      }
+      , error =>{
+          console.log("Can't get Product")
+      }
+    );
   }
 }

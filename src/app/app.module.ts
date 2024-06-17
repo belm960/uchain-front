@@ -52,6 +52,8 @@ import { httpInterceptorProviders } from './shared/security/auth-interceptor';
 import { ProductService } from "./doctor/products/product.service";
 import { OrderService } from "./admin/products copy/order.service";
 import { UserService } from "./shared/security/user.service";
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+import { MessageService } from "./shared/security/message_service";
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -73,6 +75,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    LeafletModule,
     AppRoutingModule,
     NgbModule,
     HttpClientModule,
@@ -115,6 +118,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ProductService,
     OrderService,
     UserService,
+    MessageService
   ],
   entryComponents: [
     SimpleDialogComponent,

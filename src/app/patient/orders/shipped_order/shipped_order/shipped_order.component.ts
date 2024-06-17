@@ -25,6 +25,9 @@ export class ShippedOrderComponent implements OnInit {
       data=>{
         data.forEach((value)=>{
           if(value.driver!=null && value.driver==id && value.status=='Shipped'){
+            if(value.product[0].image.includes("127.0.0.1:8000")){
+              value.product[0].image =value.product[0].image.substring(21)
+            }
             this.orders.push(value)
             }
           }
@@ -44,6 +47,6 @@ export class ShippedOrderComponent implements OnInit {
     });
   }
   orderDetail(id) {
-    this.router.navigate([`/doctor/orders/shipped_order_profile/${id}`]);
+    this.router.navigate([`/patient/orders/shipped_order_profile/${id}`]);
   }
 }

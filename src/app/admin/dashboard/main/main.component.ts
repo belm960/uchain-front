@@ -1,11 +1,20 @@
 import { Component, OnInit } from "@angular/core";
+import { TokenStorageService } from "src/app/shared/security/token-storage.service";
+import { Order } from "../../products copy/order.model";
+import { OrderService } from "../../products copy/order.service";
+import { Data } from "../dashboard2/data";
 @Component({
   selector: "app-main",
   templateUrl: "./main.component.html",
   styleUrls: ["./main.component.scss"],
 })
 export class MainComponent implements OnInit {
-  constructor() {}
+  newOrders: number = 0
+  acceptedOrders: number= 0
+  shippedOrders:number =0
+  deliveredOrders: number = 0
+  data: Data = new Data()
+  constructor(private tokenStorage: TokenStorageService, private orderService: OrderService) {}
   // area chart start
   public areaChartOptions = {
     responsive: true,
@@ -65,8 +74,16 @@ export class MainComponent implements OnInit {
   };
   areaChartData = [
     {
-      label: "New Patients",
-      data: [0, 105, 190, 140, 270],
+      label: "AA Coffee",
+      data: [
+        this.data.dataAACoffee[16].price,
+        this.data.dataAACoffee[17].price,
+        this.data.dataAACoffee[18].price,
+        this.data.dataAACoffee[19].price,
+        this.data.dataAACoffee[20].price,
+        this.data.dataAACoffee[21].price,
+        this.data.dataAACoffee[22].price,
+      ],
       borderWidth: 4,
       pointStyle: "circle",
       pointRadius: 4,
@@ -76,8 +93,16 @@ export class MainComponent implements OnInit {
       pointBorderColor: "transparent",
     },
     {
-      label: "Old Patients",
-      data: [0, 152, 80, 250, 190],
+      label: "AB Coffee",
+      data: [
+        this.data.dataCoffeeAB[16].price,
+        this.data.dataCoffeeAB[17].price,
+        this.data.dataCoffeeAB[18].price,
+        this.data.dataCoffeeAB[19].price,
+        this.data.dataCoffeeAB[20].price,
+        this.data.dataCoffeeAB[21].price,
+        this.data.dataCoffeeAB[22].price,
+      ],
       borderWidth: 4,
       pointStyle: "circle",
       pointRadius: 4,
@@ -86,8 +111,35 @@ export class MainComponent implements OnInit {
       backgroundColor: "rgba(72,239,72,.2)",
       pointBorderColor: "transparent",
     },
+    {
+      label: "C Coffee",
+      data: [
+        this.data.dataCoffeeC[16].price,
+        this.data.dataCoffeeC[17].price,
+        this.data.dataCoffeeC[18].price,
+        this.data.dataCoffeeC[19].price,
+        this.data.dataCoffeeC[20].price,
+        this.data.dataCoffeeC[21].price,
+        this.data.dataCoffeeC[22].price,
+      ],
+      borderWidth: 4,
+      pointStyle: "circle",
+      pointRadius: 4,
+      borderColor: "rgba(72,100,72,.7)",
+      pointBackgroundColor: "rgba(72,100,72,.2)",
+      backgroundColor: "rgba(72,100,72,.2)",
+      pointBorderColor: "transparent",
+    },
+    
   ];
-  areaChartLabels = ["January", "February", "March", "April", "May"];
+  areaChartLabels = ["Day One",
+    "Day Two",
+    "Day Three",
+    "Day Four",
+    "Day Five",
+    "Day Six",
+    "Day Seven",
+];
   // area chart end
   // barChart
   public barChartOptions: any = {
@@ -114,19 +166,21 @@ export class MainComponent implements OnInit {
     },
   };
   public barChartLabels: string[] = [
-    "2001",
-    "2002",
-    "2003",
-    "2004",
-    "2005",
-    "2006",
-    "2007",
+    "Day One",
+    "Day Two",
+    "Day Three",
+    "Day Four",
+    "Day Five",
+    "Day Six",
+    "Day Seven",
+
   ];
   public barChartType = "bar";
   public barChartLegend = false;
   public barChartData: any[] = [
-    { data: [58, 60, 74, 78, 55, 64, 42], label: "New Patients" },
-    { data: [30, 45, 51, 22, 79, 35, 82], label: "Old Patients" },
+    { data: [58, 60, 74, 78, 55, 64, 42], label: "AA Coffee" },
+    { data: [30, 45, 51, 22, 79, 35, 82], label: "AB Coffee" },
+    { data: [30, 45, 51, 22, 79, 35, 82], label: "C Coffee" },
   ];
   public barChartColors: Array<any> = [
     {
@@ -147,5 +201,31 @@ export class MainComponent implements OnInit {
     },
   ];
   // end bar chart
-  ngOnInit() {}
+  ngOnInit() {this.getOrder()}
+
+  getOrder(){
+    const id = parseInt(this.tokenStorage.getId())
+    this.orderService.getMyOrder().subscribe(
+      data=>{
+        data.forEach((value)=>{
+          if(value.driver==null && value.buyer==id && value.status=='Pending'){
+              this.newOrders+=1
+            }else 
+          if(value.driver!=null && value.buyer==id && value.status=='Pending'){
+              this.acceptedOrders+=1
+            }else 
+          if(value.driver!=null && value.buyer==id && value.status=='Shipped'){
+              this.shippedOrders+=1
+            }else 
+          if(value.driver!=null && value.buyer==id && value.status=='Delivered'){
+            this.deliveredOrders+=1
+          }
+          }
+        );
+      }
+      , error =>{
+          console.log("Can't get Product")
+      }
+    );
+  }
 }

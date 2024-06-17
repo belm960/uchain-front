@@ -18,6 +18,11 @@ export class ProductComponent implements OnInit {
   getProduct(){
     this.productService.getMyProduct().subscribe(
       data=>{
+        data.forEach((value)=>{
+          if(value.image.includes("127.0.0.1:8000")){
+            value.image = value.image.substring(21)
+          }
+        })
         this.products = data;
       }
       , error =>{

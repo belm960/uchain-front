@@ -1,4 +1,4 @@
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Component, Inject } from '@angular/core';
 import {
   FormControl,
@@ -9,6 +9,8 @@ import {
 import { Product } from '../../product.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ProductService } from 'src/app/doctor/products/product.service';
+import { PayComponent } from '../pay/pay.component';
+import { TokenStorageService } from 'src/app/shared/security/token-storage.service';
 
 @Component({
   selector: 'app-form-dialog',
@@ -24,7 +26,9 @@ export class FormDialogComponent {
     @Inject(MAT_DIALOG_DATA) public data: any,
     public productService: ProductService,
     private fb: FormBuilder,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    public dialog: MatDialog,
+    private tokenStorageService: TokenStorageService
   ) {
     // Set the defaults
     this.dialogTitle = data.product.name;
@@ -44,7 +48,7 @@ export class FormDialogComponent {
   }
   createContactForm(): FormGroup {
     return this.orderForm = this.fb.group({
-      quantity: [this.product.quantity, [Validators.required]],
+      quantity: [this.product.quantity, [Validators.required ,Validators.pattern('[0-9]*')]],
     });
   }
   submit() {
@@ -54,40 +58,66 @@ export class FormDialogComponent {
     this.dialogRef.close();
   }
   onSubmit() {
-      const data = {
-        "quantity": `${this.orderForm.value.quantity}`,
-        "product": [
-          {
-            "id": this.product.id
-          }
-        ]
-      }
-      this.productService.addOrder(data).subscribe(
-        _=> {
-            this.showNotification(
-              'snackbar-success',
-              'Order Submitted Successfully...!!!',
-              'bottom',
-              'center'
-            );
-          },
-        _=> {
-          this.showNotification(
-            'snackbar-danger',
-            'Ops! can not place order. Try Again...!!!',
-            'bottom',
-            'center'
-          );
-        }
-      );
-    }
+    //   const data = {
+    //     "quantity": `${this.orderForm.value.quantity}`,
+    //     "product": [
+    //       {
+    //         "id": this.product.id
+    //       }
+    //     ]
+    //   }
+    //   this.productService.addOrder(data).subscribe(
+    //     _=> {
+    //         this.showNotification(
+    //           'snackbar-success',
+    //           'Order Submitted Successfully...!!!',
+    //           'bottom',
+    //           'center'
+    //         );
+    //       },
+    //     _=> {
+    //       this.showNotification(
+    //         'snackbar-danger',
+    //         'Ops! can not place order. Try Again...!!!',
+    //         'bottom',
+    //         'center'
+    //       );
+    //     }
+    //   );
+    // }
 
-    showNotification(colorName, text, placementFrom, placementAlign) {
-      this.snackBar.open(text, '', {
-        duration: 2000,
-        verticalPosition: placementFrom,
-        horizontalPosition: placementAlign,
-        panelClass: colorName,
-      });
-    }
+    // showNotification(colorName, text, placementFrom, placementAlign) {
+    //   this.snackBar.open(text, '', {
+    //     duration: 2000,
+    //     verticalPosition: placementFrom,
+    //     horizontalPosition: placementAlign,
+    //     panelClass: colorName,
+    //   });
+    // }
+
+    const dialogRef = this.dialog.open(PayComponent, {
+      data: {
+        name: this.product.name,
+        price: (+this.orderForm.value.quantity)*this.product.price
+      },
+    });
+    this.tokenStorageService.savePId(this.product.id.toString())
+    this.tokenStorageService.saveQuantity(this.orderForm.value.quantity)
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === 1) {
+        // After dialog is closed we're doing frontend updates
+        // For add we're just pushing a new row inside DataService
+      }
+    });
+  }
+
+  showNotification(colorName, text, placementFrom, placementAlign) {
+    this.snackBar.open(text, '', {
+      duration: 2000,
+      verticalPosition: placementFrom,
+      horizontalPosition: placementAlign,
+      panelClass: colorName,
+    });
+  }
+
 }

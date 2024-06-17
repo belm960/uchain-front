@@ -2,7 +2,7 @@
   <div class="modalHeader">
     <div class="editRowModal">
       <div class="modalHeader clearfix">
-        <img [src]='product.image' alt="avatar">
+        <img [src]='product.image' alt="avatar" height="55sspx" width="55px" alt="" class="rounded-circle">
         <div class="modal-about">
           <div class="font-weight-bold p-t-5 p-l-10 font-17">
             {{dialogTitle}}</div>
@@ -14,14 +14,17 @@
     </button>
   </div>
   <div mat-dialog-content>
-    <form class="m-4" [formGroup]="orderForm" (ngSubmit)="onSubmit()">
+    <form class="m-4" [formGroup]="orderForm">
       <div class="row">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
           <mat-form-field class="example-full-width mb-3">
-            <mat-label>Quantity (Describe with the unit)</mat-label>
-            <input matInput formControlName="quantity" required>
+            <mat-label>Quantity (No Only Regrading described unit with the unit)</mat-label>
+            <input matInput formControlName="quantity" required type="number">
             <mat-error *ngIf="orderForm.get('quantity').hasError('required')">
               Quantity is required
+            </mat-error>
+            <mat-error *ngIf="orderForm.get('quantity').hasError('pattern')">
+              Please Enter Number Only
             </mat-error>
           </mat-form-field>
         </div>
@@ -29,7 +32,7 @@
       <div class="row">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
           <button class="mr-3" [disabled]="!orderForm.valid " mat-raised-button
-            color="primary" [type]="submit" [mat-dialog-close]="1" (click)="onSubmit()">Submit</button>
+            color="primary" [type]="submit" [mat-dialog-close]="1" (click)="onSubmit()">Order</button>
           <button type="button" mat-button >Cancel</button>
         </div>
       </div>

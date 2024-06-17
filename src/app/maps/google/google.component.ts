@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MouseEvent } from '@agm/core';
+import * as L from 'leaflet';
 interface marker {
   lat: number;
   lng: number;
@@ -50,4 +51,14 @@ export class GoogleComponent {
       draggable: true
     }
   ];
+
+  options = {
+    layers: [
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+      })
+    ],
+    zoom: 5,
+    center: L.latLng([ 46.879966, -121.726909 ])
+  };
 }

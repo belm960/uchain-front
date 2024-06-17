@@ -1,13 +1,23 @@
 import { Component, OnInit } from "@angular/core";
 import { EChartOption } from "echarts";
+import { Data } from "./data";
 @Component({
   selector: "app-dashboard2",
   templateUrl: "./dashboard2.component.html",
   styleUrls: ["./dashboard2.component.scss"],
 })
 export class Dashboard2Component implements OnInit {
-  config: any;
-
+config: any;
+data: Data = new Data()
+today: any = this.data.dataAACoffee[20].price
+thisWeek: any = this.data.getSumAA(24,0,17)
+thisMonth: any = this.data.getMonthAA(0);
+today1: any = this.data.dataCoffeeAB[20].price
+thisWeek1: any = this.data.getSumAB(24,0,17)
+thisMonth1: any = this.data.getMonthAB(0);
+today2: any = this.data.dataCoffeeC[20].price
+thisWeek2: any = this.data.getSumC(24,0,17)
+thisMonth2: any = this.data.getMonthC(0);
   line_chart: EChartOption = {
     grid: {
       top: "6",
@@ -16,7 +26,7 @@ export class Dashboard2Component implements OnInit {
       left: "25",
     },
     xAxis: {
-      data: ["2014", "2015", "2016", "2017", "2018", "2019", "2020"],
+      data: ["Week One", "Week Two", "Week Three", "Week Four"],
       axisLine: {
         lineStyle: {
           color: "#eaeaea",
@@ -52,7 +62,7 @@ export class Dashboard2Component implements OnInit {
     },
     series: [
       {
-        name: "Doctor 1",
+        name: "AA COFFEE",
         type: "line",
         smooth: true,
         lineStyle: {
@@ -61,12 +71,12 @@ export class Dashboard2Component implements OnInit {
           shadowBlur: 10,
           shadowOffsetY: 10,
         },
-        data: [70, 200, 80, 180, 170, 105, 210],
+        data: [this.data.getSumAA(7,0,0),this.data.getSumAA(14,0,7),this.data.getSumAA(21,0,14),this.data.getSumAA(28,0,21)],
         symbolSize: 10,
         // color: ["#FF8D60"]
       },
       {
-        name: "Doctor 2",
+        name: "AB COFFEE",
         type: "line",
         smooth: true,
         lineStyle: {
@@ -77,11 +87,11 @@ export class Dashboard2Component implements OnInit {
         },
         symbolSize: 10,
         // size: 10,
-        data: [80, 250, 30, 120, 260, 100, 180],
+        data: [this.data.getSumAB(7,0,0),this.data.getSumAB(14,0,7),this.data.getSumAB(21,0,14),this.data.getSumAB(28,0,21)],
         // color: ["#009DA0"]
       },
       {
-        name: "Doctor 3",
+        name: "C COFFEE",
         type: "line",
         smooth: true,
         lineStyle: {
@@ -92,7 +102,8 @@ export class Dashboard2Component implements OnInit {
         },
         symbolSize: 10,
         // size: 10,
-        data: [85, 130, 85, 225, 80, 190, 120],
+        data: [
+          this.data.getSumC(7,0,0),this.data.getSumC(14,0,7),this.data.getSumC(21,0,14),this.data.getSumC(28,0,21)],
         // color: ["#009DA0"]
       },
     ],
@@ -114,6 +125,8 @@ export class Dashboard2Component implements OnInit {
     responsive: true,
   };
   // Doughnut chart end
-  constructor() {}
+  constructor() {
+  }
   ngOnInit() {}
+
 }

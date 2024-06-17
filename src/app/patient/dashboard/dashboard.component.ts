@@ -15,6 +15,8 @@ import {
   ApexGrid,
   ApexTitleSubtitle,
 } from 'ng-apexcharts';
+import { OrderService } from 'src/app/admin/products copy/order.service';
+import { TokenStorageService } from 'src/app/shared/security/token-storage.service';
 export type areaChartOptions = {
   series: ApexAxisChartSeries;
   chart: ApexChart;
@@ -75,8 +77,15 @@ export class DashboardComponent implements OnInit {
   public restRateChartOptions: Partial<restRateChartOptions>;
   public performanceRateChartOptions: Partial<performanceRateChartOptions>;
 
-  constructor() {}
+  newOrders: number = 0
+  acceptedOrders: number=0
+  shippedOrders: number=0
+  deliveredOrders: number=0
+  username: string = this.tokenStorage.getUsername()
+  profileImage: string = this.tokenStorage.getProfileImage()
+  constructor(private orderService: OrderService,private tokenStorage: TokenStorageService) {}
   ngOnInit() {
+    this.getOrder();
     this.chart1();
     this.chart2();
     this.chart3();
@@ -279,5 +288,30 @@ export class DashboardComponent implements OnInit {
         },
       },
     };
+  }
+  getOrder(){
+    const id = parseInt(this.tokenStorage.getId())
+    this.orderService.getMyOrder().subscribe(
+      data=>{
+        data.forEach((value)=>{
+          if(value.driver==null && value.status=='Pending'){
+              this.newOrders+=1
+            }else 
+          if(value.driver!=null && value.driver==id && value.status=='Pending'){
+              this.acceptedOrders+=1
+            }else 
+          if(value.driver!=null && value.driver==id && value.status=='Shipped'){
+              this.shippedOrders+=1
+            }else 
+          if(value.driver!=null && value.driver==id && value.status=='Delivered'){
+            this.deliveredOrders+=1
+          }
+          }
+        );
+      }
+      , error =>{
+          console.log("Can't get Product")
+      }
+    );
   }
 }

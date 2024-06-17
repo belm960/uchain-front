@@ -31,6 +31,11 @@ import { DragDropModule } from "@angular/cdk/drag-drop";
 
 import { MatRadioModule } from "@angular/material/radio";
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from "ng-pick-datetime";
+import { PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+
+const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
+  suppressScrollX: true
+};
 
 @NgModule({
   declarations: [
@@ -69,6 +74,6 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from "ng-pick-datetime";
     OwlNativeDateTimeModule,
     MatRadioModule,
     DragulaModule.forRoot(),
-  ],
+  ]
 })
 export class AppsModule {}

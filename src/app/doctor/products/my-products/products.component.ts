@@ -25,6 +25,9 @@ export class ProductsComponent implements OnInit {
       data=>{
         data.forEach((value)=>{
           if(value.seller==+userId){
+            if(value.image.includes("127.0.0.1:8000")){
+              value.image = value.image.substring(21)
+            }
             this.products.push(value)
           }
         })

@@ -21,6 +21,7 @@ export class AddProductComponent {
       quantity: ['', [Validators.required]],
       image: ['', [Validators.required]],
       product_type: ['', [Validators.required]],
+      location: ['',[Validators.required]]
       
     });
   }
@@ -33,6 +34,7 @@ export class AddProductComponent {
       formData.append('price', this.productForm.get('price').value);
       formData.append('quantity', this.productForm.get('quantity').value);
       formData.append('product_type', this.productForm.get('product_type').value);
+      formData.append('location', this.productForm.get('location').value);
       formData.append('image', this.productForm.get('image').value._files[0]);
    
       this.productService.addProduct(formData).subscribe(
