@@ -65,15 +65,15 @@ export class SigninComponent implements OnInit {
           if (role === 'BUYER') {
             localStorage.setItem('STATE', 'true');
             localStorage.setItem('ROLE', "BUYER")
-            this.router.navigate(['/admin/dashboard/main']);
+            this.router.navigate(['/buyer/dashboard/main']);
           } else if (role === 'SELLER') {
             localStorage.setItem('STATE', 'true');
             localStorage.setItem('ROLE', "SELLER")
-            this.router.navigate(['/doctor/dashboard']);
+            this.router.navigate(['/seller/dashboard']);
           } else if (role === 'DRIVER') {
             localStorage.setItem('STATE', 'true');
             localStorage.setItem('ROLE', "DRIVER")
-            this.router.navigate(['/patient/dashboard']);
+            this.router.navigate(['/driver/dashboard']);
           }
         },
         error => {

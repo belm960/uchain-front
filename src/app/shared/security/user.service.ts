@@ -30,6 +30,10 @@ export class UserService {
     const userUrl = apiUrl + 'user/all'
     return this.httpClient.get<User[]>(userUrl)
   }
+  updateUser(id,data:FormData){
+    const updateUrl = apiUrl+'user/update/'+id
+    return this.httpClient.put(updateUrl,data)
+  }
   getRatings(){
     const getOneProductUrl = apiUrl+'ratings/'
     return this.httpClient.get<Rate[]>(getOneProductUrl)

@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
  
 import { JwtResponse } from './jwt-response';
 import { AuthLoginInfo } from './login-info';
-import { SignUpInfo } from './signup-info';
 import { of } from 'rxjs';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })

@@ -13,120 +13,37 @@ const routes: Routes = [
     children: [
       { path: "", redirectTo: "/authentication/signin", pathMatch: "full" },
       {
-        path: "admin",
+        path: "buyer",
         canActivate: [AuthGuard],
         data: {
           role: Role.BUYER,
         
         },
         loadChildren: () =>
-          import("./admin/admin.module").then((m) => m.AdminModule),
+          import("./buyer/buyer.module").then((m) => m.BuyerModule),
       },
       {
-        path: "doctor",
+        path: "seller",
         canActivate: [AuthGuard],
         data: {
-          role: Role.SELLER,
+          role: Role.SELLER || Role.BUYER,
         },
         loadChildren: () =>
-          import("./doctor/doctor.module").then((m) => m.DoctorModule),
+          import("./seller/seller.module").then((m) => m.SellerModule),
       },
       {
-        path: "patient",
+        path: "driver",
         canActivate: [AuthGuard],
         data: {
           role: Role.DRIVER,
         },
         loadChildren: () =>
-          import("./patient/patient.module").then((m) => m.PatientModule),
-      },
-      {
-        path: "calendar",
-        loadChildren: () =>
-          import("./calendar/calendar.module").then((m) => m.CalendarsModule),
-      },
-      {
-        path: "task",
-        loadChildren: () =>
-          import("./task/task.module").then((m) => m.TaskModule),
-      },
-      {
-        path: "contacts",
-        loadChildren: () =>
-          import("./contacts/contacts.module").then((m) => m.ContactsModule),
-      },
-      {
-        path: "email",
-        loadChildren: () =>
-          import("./email/email.module").then((m) => m.EmailModule),
-      },
-      {
-        path: "calendar",
-        loadChildren: () =>
-          import("./apps/apps.module").then((m) => m.AppsModule),
+          import("./driver/driver.module").then((m) => m.DriverModule),
       },
       {
         path: "apps",
         loadChildren: () =>
           import("./apps/apps.module").then((m) => m.AppsModule),
-      },
-      {
-        path: "widget",
-        loadChildren: () =>
-          import("./widget/widget.module").then((m) => m.WidgetModule),
-      },
-      {
-        path: "ui",
-        loadChildren: () => import("./ui/ui.module").then((m) => m.UiModule),
-      },
-      {
-        path: "forms",
-        loadChildren: () =>
-          import("./forms/forms.module").then((m) => m.FormModule),
-      },
-      {
-        path: "tables",
-        loadChildren: () =>
-          import("./tables/tables.module").then((m) => m.TablesModule),
-      },
-      {
-        path: "media",
-        loadChildren: () =>
-          import("./media/media.module").then((m) => m.MediaModule),
-      },
-      {
-        path: "charts",
-        loadChildren: () =>
-          import("./charts/charts.module").then((m) => m.ChartsModule),
-      },
-      {
-        path: "timeline",
-        loadChildren: () =>
-          import("./timeline/timeline.module").then((m) => m.TimelineModule),
-      },
-      {
-        path: "icons",
-        loadChildren: () =>
-          import("./icons/icons.module").then((m) => m.IconsModule),
-      },
-      {
-        path: "extra-pages",
-        loadChildren: () =>
-          import("./extra-pages/extra-pages.module").then(
-            (m) => m.ExtraPagesModule
-          ),
-      },
-      {
-        path: "maps",
-        loadChildren: () =>
-          import("./maps/maps.module").then((m) => m.MapsModule),
-      },
-      {
-        path: "multilevel",
-        loadChildren: () =>
-          import("./multilevel/multilevel.module").then(
-            (m) => m.MultilevelModule
-          ),
       },
     ],
   },

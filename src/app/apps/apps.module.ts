@@ -11,9 +11,6 @@ import { MatTabsModule } from "@angular/material/tabs";
 import { MatMenuModule } from "@angular/material/menu";
 import { AppsRoutingModule } from "./apps-routing.module";
 import { ChatComponent } from "./chat/chat.component";
-import { DragDropComponent } from "./drag-drop/drag-drop.component";
-import { ContactGridComponent } from "./contact-grid/contact-grid.component";
-import { SupportComponent } from "./support/support.component";
 import { MatButtonModule } from "@angular/material/button";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatTableModule } from "@angular/material/table";
@@ -40,9 +37,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 @NgModule({
   declarations: [
     ChatComponent,
-    DragDropComponent,
-    ContactGridComponent,
-    SupportComponent,
   ],
   imports: [
     CommonModule,
